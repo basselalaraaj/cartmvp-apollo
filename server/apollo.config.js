@@ -1,5 +1,5 @@
 module.exports = {
   service: {
-    name: "ac3-todos-backend"
+    name: "ac3-cart-backend"
   }
 }
