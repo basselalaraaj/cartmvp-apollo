@@ -1,9 +1,9 @@
 import React from "react";
 import CartItem from "../components/CartItem";
-import { useDeleteTodo } from "../operations/mutations/deleteTodo";
+import { useDeleteCartItem } from "../operations/mutations/deleteCartItem";
 
 const CartItemContainer: React.FC<any> = ({ todo }) => {
-  const { mutate: deleteTodo } = useDeleteTodo();
+  const { mutate: deleteTodo } = useDeleteCartItem();
 
   return (
     <CartItem

@@ -1,26 +1,27 @@
 import React from "react";
 import MainSection from "../components/MainSection";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_TODOS } from "../operations/queries/getAllTodos";
-import { GetAllTodos } from "../operations/__generated__/GetAllTodos";
+import { GET_CART } from "../operations/queries/getCart";
+// import { GetCart } from "../operations/__generated__/GetCart";
 
 export default function Main() {
   const {
-    loading: isTodosLoading,
-    data: todosConnection,
-    error: todosError,
-  } = useQuery<GetAllTodos>(GET_ALL_TODOS);
-  if (isTodosLoading) {
+    loading: isCartLoading,
+    data: cartConnection,
+    error: cartError,
+  } = useQuery(GET_CART);
+  // } = useQuery<GetCart>(GET_CART);
+  if (isCartLoading) {
     return <div>Loading...</div>;
   }
 
-  if (todosError) {
-    return <div>An error occurred {JSON.stringify(todosError)}</div>;
+  if (cartError) {
+    return <div>An error occurred {JSON.stringify(cartError)}</div>;
   }
 
-  if (!todosConnection) {
+  if (!cartConnection) {
     return <div>None</div>;
   }
 
-  return <MainSection itemsCount={todosConnection.todos.edges.length} />;
+  return <MainSection itemsCount={cartConnection.cart.items.length} />;
 }
