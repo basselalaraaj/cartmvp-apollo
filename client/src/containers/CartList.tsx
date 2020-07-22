@@ -1,15 +1,17 @@
 import React from "react";
-import MainSection from "../components/MainSection";
+import CartList from "../components/CartList";
+import { Todos } from "../models/Todos";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_TODOS } from "../operations/queries/getAllTodos";
 import { GetAllTodos } from "../operations/__generated__/GetAllTodos";
+import { GET_ALL_TODOS } from "../operations/queries/getAllTodos";
 
-export default function Main() {
+const CartListContainer = () => {
   const {
     loading: isTodosLoading,
     data: todosConnection,
     error: todosError,
   } = useQuery<GetAllTodos>(GET_ALL_TODOS);
+
   if (isTodosLoading) {
     return <div>Loading...</div>;
   }
@@ -22,5 +24,9 @@ export default function Main() {
     return <div>None</div>;
   }
 
-  return <MainSection itemsCount={todosConnection.todos.edges.length} />;
-}
+  const todos: Todos = todosConnection.todos.edges.map((t) => t?.node) as Todos;
+
+  return <CartList filteredTodos={todos} />;
+};
+
+export default CartListContainer;
