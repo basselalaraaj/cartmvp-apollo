@@ -24,7 +24,7 @@ const CartListContainer = () => {
     return <div>None</div>;
   }
 
-  return <CartList items={cartConnection.getCart?.items} />;
+  return <CartList items={cartConnection.getCart?.cart.items} />;
 };
 
 export default CartListContainer;

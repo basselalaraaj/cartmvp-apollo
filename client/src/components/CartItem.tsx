@@ -41,10 +41,7 @@ const CartItem: React.FC<Props> = ({ item, deleteItem, updateItemCount }) => {
           -
         </button>
 
-        <button
-          style={{ ...buttonStyles, right: "10px" }}
-          onClick={() => deleteItem({ variables: { id: item.id } })}
-        >
+        <button style={{ ...buttonStyles, right: "10px" }} onClick={deleteItem}>
           x
         </button>
       </div>

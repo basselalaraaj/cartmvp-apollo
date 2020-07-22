@@ -3,7 +3,7 @@ import CartItem from "../components/CartItem";
 import { useDeleteCartItem } from "../operations/mutations/deleteCartItem";
 
 const CartItemContainer: React.FC<any> = ({ item }) => {
-  const { mutate: deleteItem } = useDeleteCartItem();
+  const { mutate: deleteItem } = useDeleteCartItem(item.id);
 
   return (
     <CartItem

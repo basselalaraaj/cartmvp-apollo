@@ -22,5 +22,5 @@ export default function Main() {
     return <div>None</div>;
   }
 
-  return <MainSection itemsCount={cartConnection.getCart.items.length} />;
+  return <MainSection itemsCount={cartConnection.getCart.cart.items.length} />;
 }

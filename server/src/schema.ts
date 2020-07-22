@@ -1,27 +1,27 @@
 import { gql } from "apollo-server";
 
 const typeDefs = gql`
-    type CartItem {
-        id: Int!
-        title: String!
-    }
+  type CartItem {
+    id: Int!
+    title: String!
+  }
 
-    type Cart {
-        items: [CartItem!]!
-    }
+  type Cart {
+    items: [CartItem!]!
+  }
 
-    type Query {
-        getCart(id: Int!): Cart!
-    }
+  type CartResult {
+    success: Boolean!
+    cart: Cart!
+  }
 
-    type DeleteCartItemResult {
-        success: Boolean!
-        cartItem: Int!
-    }
+  type Query {
+    getCart(id: Int!): CartResult!
+  }
 
-    type Mutation {
-        deleteCartItem(id: Int!): DeleteCartItemResult!
-    }
+  type Mutation {
+    deleteCartItem(id: Int!): CartResult!
+  }
 `;
 
 export { typeDefs };

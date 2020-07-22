@@ -1,41 +1,43 @@
-import { gql, useMutation } from "@apollo/client";
+import { useCallback } from "react";
+import { useMutation } from "@apollo/client";
+import gql from "graphql-tag.macro";
 import * as DeleteCartItemTypes from "./__generated__/DeleteCartItem";
+import { CartFragments } from "../fragments";
 
 export const DELETE_CART_ITEM = gql`
   mutation DeleteCartItem($id: Int!) {
     deleteCartItem(id: $id) {
-      cartItem
+      cart {
+        ...CartDetailsFragment
+      }
       success
     }
+    ${CartFragments.details}
   }
 `;
 
-export const useDeleteCartItem = () => {
-  const [mutate, { data, error }] = useMutation<
+export const useDeleteCartItem = (itemId: number) => {
+  const [deleteCartItem, { data, error }] = useMutation<
     DeleteCartItemTypes.DeleteCartItem,
     DeleteCartItemTypes.DeleteCartItemVariables
   >(DELETE_CART_ITEM, {
-    update(cache, el) {
-      const deletedId = el.data?.deleteCartItem.cartItem;
-
+    update(cache, result) {
+      const newCart = result.data?.deleteCartItem.cart;
       cache.modify({
         fields: {
-          cart(existingCart, { readField }) {
-            const newCart = {
-              ...existingCart,
-              items: existingCart.items.filter((item: any) => {
-                return deletedId !== readField("id", item.id);
-              }),
-            };
-
-            return newCart;
+          cart(existingCart) {
+            return { ...existingCart, ...newCart };
           },
         },
       });
 
-      cache.evict({ id: `CartItem:${deletedId}` });
+      cache.evict({ id: `CartItem:${itemId}` });
     },
   });
+
+  const mutate = useCallback(() => {
+    deleteCartItem({ variables: { id: itemId } });
+  }, [deleteCartItem, itemId]);
 
   return { mutate, data, error };
 };

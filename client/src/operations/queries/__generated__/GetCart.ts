@@ -7,15 +7,21 @@
 // GraphQL query operation: GetCart
 // ====================================================
 
-export interface GetCart_getCart_items {
+export interface GetCart_getCart_cart_items {
   __typename: "CartItem";
   id: number;
   title: string;
 }
 
-export interface GetCart_getCart {
+export interface GetCart_getCart_cart {
   __typename: "Cart";
-  items: GetCart_getCart_items[];
+  items: GetCart_getCart_cart_items[];
+}
+
+export interface GetCart_getCart {
+  __typename: "CartResult";
+  cart: GetCart_getCart_cart;
+  success: boolean;
 }
 
 export interface GetCart {

@@ -28,15 +28,15 @@ export type CartItem = {
   title: Scalars['String'];
 };
 
-export type DeleteCartItemResult = {
-   __typename?: 'DeleteCartItemResult';
+export type CartResult = {
+   __typename?: 'CartResult';
   success: Scalars['Boolean'];
-  cartItem: Scalars['Int'];
+  cart: Cart;
 };
 
 export type Mutation = {
    __typename?: 'Mutation';
-  deleteCartItem: DeleteCartItemResult;
+  deleteCartItem: CartResult;
 };
 
 
@@ -46,7 +46,7 @@ export type MutationDeleteCartItemArgs = {
 
 export type Query = {
    __typename?: 'Query';
-  getCart: Cart;
+  getCart: CartResult;
 };
 
 
@@ -130,12 +130,12 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>,
   Int: ResolverTypeWrapper<Scalars['Int']>,
+  CartResult: ResolverTypeWrapper<CartResult>,
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   Cart: ResolverTypeWrapper<Cart>,
   CartItem: ResolverTypeWrapper<CartItem>,
   String: ResolverTypeWrapper<Scalars['String']>,
   Mutation: ResolverTypeWrapper<{}>,
-  DeleteCartItemResult: ResolverTypeWrapper<DeleteCartItemResult>,
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
   CacheControlScope: CacheControlScope,
   Upload: ResolverTypeWrapper<Scalars['Upload']>,
 };
@@ -144,12 +144,12 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Query: {},
   Int: Scalars['Int'],
+  CartResult: CartResult,
+  Boolean: Scalars['Boolean'],
   Cart: Cart,
   CartItem: CartItem,
   String: Scalars['String'],
   Mutation: {},
-  DeleteCartItemResult: DeleteCartItemResult,
-  Boolean: Scalars['Boolean'],
   CacheControlScope: CacheControlScope,
   Upload: Scalars['Upload'],
 };
@@ -165,18 +165,18 @@ export type CartItemResolvers<ContextType = any, ParentType extends ResolversPar
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
-export type DeleteCartItemResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteCartItemResult'] = ResolversParentTypes['DeleteCartItemResult']> = {
+export type CartResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['CartResult'] = ResolversParentTypes['CartResult']> = {
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
-  cartItem?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
+  cart?: Resolver<ResolversTypes['Cart'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  deleteCartItem?: Resolver<ResolversTypes['DeleteCartItemResult'], ParentType, ContextType, RequireFields<MutationDeleteCartItemArgs, 'id'>>,
+  deleteCartItem?: Resolver<ResolversTypes['CartResult'], ParentType, ContextType, RequireFields<MutationDeleteCartItemArgs, 'id'>>,
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getCart?: Resolver<ResolversTypes['Cart'], ParentType, ContextType, RequireFields<QueryGetCartArgs, 'id'>>,
+  getCart?: Resolver<ResolversTypes['CartResult'], ParentType, ContextType, RequireFields<QueryGetCartArgs, 'id'>>,
 };
 
 export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
@@ -186,7 +186,7 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 export type Resolvers<ContextType = any> = {
   Cart?: CartResolvers<ContextType>,
   CartItem?: CartItemResolvers<ContextType>,
-  DeleteCartItemResult?: DeleteCartItemResultResolvers<ContextType>,
+  CartResult?: CartResultResolvers<ContextType>,
   Mutation?: MutationResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   Upload?: GraphQLScalarType,
