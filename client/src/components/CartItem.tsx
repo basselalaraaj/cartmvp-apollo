@@ -1,6 +1,12 @@
 import React from "react";
+import * as CartModel from "../models/Cart";
+import { useDeleteCartItem } from "../operations/mutations/deleteCartItem";
 
-type Props = any;
+type Props = {
+  item: CartModel.CartItem;
+  deleteItem: ReturnType<typeof useDeleteCartItem>["mutate"];
+  updateItemCount: (id: number, amount: number) => void;
+};
 
 const buttonStyles: any = {
   position: "absolute",
@@ -37,7 +43,7 @@ const CartItem: React.FC<Props> = ({ item, deleteItem, updateItemCount }) => {
 
         <button
           style={{ ...buttonStyles, right: "10px" }}
-          onClick={() => deleteItem({ variables: item.id })}
+          onClick={() => deleteItem({ variables: { id: item.id } })}
         >
           x
         </button>

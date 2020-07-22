@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-// import * as DeleteTodoTypes from './__generated__/DeleteTodo'
+import * as DeleteCartItemTypes from "./__generated__/DeleteCartItem";
 
 export const DELETE_CART_ITEM = gql`
   mutation DeleteCartItem($id: Int!) {
@@ -11,13 +11,12 @@ export const DELETE_CART_ITEM = gql`
 `;
 
 export const useDeleteCartItem = () => {
-  // const [mutate, { data, error }] = useMutation<
-  //   DeleteTodoTypes.DeleteTodo,
-  //   DeleteTodoTypes.DeleteTodoVariables
-  // >(
-  const [mutate, { data, error }] = useMutation(DELETE_CART_ITEM, {
+  const [mutate, { data, error }] = useMutation<
+    DeleteCartItemTypes.DeleteCartItem,
+    DeleteCartItemTypes.DeleteCartItemVariables
+  >(DELETE_CART_ITEM, {
     update(cache, el) {
-      const deletedId = el.data?.deleteCartItem.item.id;
+      const deletedId = el.data?.deleteCartItem.cartItem;
 
       cache.modify({
         fields: {
