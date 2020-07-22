@@ -31,6 +31,7 @@ export type CartItem = {
 export type DeleteCartItemResult = {
    __typename?: 'DeleteCartItemResult';
   success: Scalars['Boolean'];
+  cartItem: Scalars['Int'];
 };
 
 export type Mutation = {
@@ -166,6 +167,7 @@ export type CartItemResolvers<ContextType = any, ParentType extends ResolversPar
 
 export type DeleteCartItemResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteCartItemResult'] = ResolversParentTypes['DeleteCartItemResult']> = {
   success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>,
+  cartItem?: Resolver<ResolversTypes['Int'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 };
 

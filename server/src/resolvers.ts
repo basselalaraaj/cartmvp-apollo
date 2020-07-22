@@ -7,7 +7,7 @@ const resolvers: Resolvers = {
             const { cartRepo } = context;
 
             await cartRepo.deleteCartItem(id);
-            return { success: true };
+            return { success: true, cartItem: id };
         },
     },
     Query: {

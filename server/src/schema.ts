@@ -16,6 +16,7 @@ const typeDefs = gql`
 
     type DeleteCartItemResult {
         success: Boolean!
+        cartItem: Int!
     }
 
     type Mutation {
