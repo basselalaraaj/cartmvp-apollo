@@ -16,28 +16,28 @@ const buttonStyles: any = {
   cursor: "pointer",
 };
 
-const CartItem: React.FC<Props> = ({ todo, deleteTodo, updateTodoCount }) => {
+const CartItem: React.FC<Props> = ({ item, deleteItem, updateItemCount }) => {
   return (
     <li>
       <div className="view">
-        <label style={{ padding: "15px" }}>{todo.text}</label>
+        <label style={{ padding: "15px" }}>{item.title}</label>
 
         <button
           style={{ ...buttonStyles, right: "90px" }}
-          onClick={() => updateTodoCount(todo.id, -1)}
+          onClick={() => updateItemCount(item.id, -1)}
         >
           +
         </button>
         <button
           style={{ ...buttonStyles, right: "50px" }}
-          onClick={() => updateTodoCount(todo.id, 1)}
+          onClick={() => updateItemCount(item.id, 1)}
         >
           -
         </button>
 
         <button
           style={{ ...buttonStyles, right: "10px" }}
-          onClick={() => deleteTodo(todo.id)}
+          onClick={() => deleteItem({ variables: item.id })}
         >
           x
         </button>

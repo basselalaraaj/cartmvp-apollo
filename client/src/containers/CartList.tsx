@@ -2,7 +2,7 @@ import React from "react";
 import CartList from "../components/CartList";
 // import { CartItem } from "../models/Cart";
 import { useQuery } from "@apollo/client";
-// import { GetCart } from "../operations/__generated__/GetCart";
+import { GetCart } from "../operations/queries/__generated__/GetCart";
 import { GET_CART } from "../operations/queries/getCart";
 
 const CartListContainer = () => {
@@ -10,8 +10,7 @@ const CartListContainer = () => {
     loading: isCartLoading,
     data: cartConnection,
     error: cartError,
-  } = useQuery(GET_CART);
-  // } = useQuery<GetCart>(GET_CART);
+  } = useQuery<GetCart>(GET_CART, { variables: { id: 1 } });
 
   if (isCartLoading) {
     return <div>Loading...</div>;
@@ -25,7 +24,7 @@ const CartListContainer = () => {
     return <div>None</div>;
   }
 
-  return <CartList items={cartConnection.cart.items} />;
+  return <CartList items={cartConnection.getCart?.items} />;
 };
 
 export default CartListContainer;

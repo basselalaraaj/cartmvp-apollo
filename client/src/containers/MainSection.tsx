@@ -2,15 +2,14 @@ import React from "react";
 import MainSection from "../components/MainSection";
 import { useQuery } from "@apollo/client";
 import { GET_CART } from "../operations/queries/getCart";
-// import { GetCart } from "../operations/__generated__/GetCart";
+import { GetCart } from "../operations/queries/__generated__/GetCart";
 
 export default function Main() {
   const {
     loading: isCartLoading,
     data: cartConnection,
     error: cartError,
-  } = useQuery(GET_CART);
-  // } = useQuery<GetCart>(GET_CART);
+  } = useQuery<GetCart>(GET_CART, { variables: { id: 1 } });
   if (isCartLoading) {
     return <div>Loading...</div>;
   }
@@ -23,5 +22,5 @@ export default function Main() {
     return <div>None</div>;
   }
 
-  return <MainSection itemsCount={cartConnection.cart.items.length} />;
+  return <MainSection itemsCount={cartConnection.getCart.items.length} />;
 }

@@ -4,9 +4,7 @@ import { gql, useMutation } from "@apollo/client";
 export const DELETE_CART_ITEM = gql`
   mutation DeleteCartItem($id: Int!) {
     deleteCartItem(id: $id) {
-      item {
-        id
-      }
+      cartItem
       success
     }
   }

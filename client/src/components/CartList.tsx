@@ -1,11 +1,11 @@
 import React from "react";
 import CartItem from "../containers/CartItem";
-import { Todo } from "../models/Todos";
+import { CartItem as CartItemModel } from "../models/Cart";
 
-const CartList = ({ filteredTodos }: any) => (
+const CartList = ({ items }: any) => (
   <ul className="todo-list">
-    {filteredTodos.map((todo: Todo) => (
-      <CartItem key={todo.id} todo={todo} />
+    {items.map((item: CartItemModel) => (
+      <CartItem key={item.id} item={item} />
     ))}
   </ul>
 );
